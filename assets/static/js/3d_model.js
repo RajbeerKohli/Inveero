@@ -6,7 +6,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("3d-container").appendChild(renderer.domElement);
 
@@ -14,12 +14,12 @@ document.getElementById("3d-container").appendChild(renderer.domElement);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // Load 3D model
-let model; // Variable to hold the loaded model
+let model;
 const loader = new THREE.GLTFLoader();
 loader.load(
-  "../model/dollar_bill.glb", // Ensure this path is correct relative to your server
+  "../model/dollar_bill.glb", // Updated path to the model
   (gltf) => {
-    model = gltf.scene; // Assign the loaded model to the variable
+    model = gltf.scene;
     scene.add(model);
 
     // Set initial rotation (angles in radians)
@@ -28,26 +28,25 @@ loader.load(
     model.rotation.z = Math.PI / 1; // Rotate 22.5 degrees around Z-axis
   },
   undefined,
-  (error) => {
-    console.error("Error loading model:", error);
-  }
+  (error) => console.error("Error loading model:", error)
 );
 
 // Add lighting
 const light = new THREE.AmbientLight(0xffffff, 1);
 scene.add(light);
 
-// Set camera position
-camera.position.y = 7.5;
+// // Set camera position
+// camera.position.y = 8;
+
+// Adjust camera position based on device
+camera.position.y = window.innerWidth < 768 ? 12 : 7.5; // Set a smaller camera position for smaller screens
 
 // Animation loop
 function animate() {
   requestAnimationFrame(animate);
 
-  // Rotate the model continuously
-  if (model) {
-    model.rotation.z += 0.01; // Rotate around Y-axis
-  }
+  // Rotate the model
+  if (model) model.rotation.z += 0.01;
 
   controls.update();
   renderer.render(scene, camera);
@@ -60,8 +59,3 @@ window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 });
-
-// Dynamically update the age label
-function updateAgeLabel(value) {
-  document.getElementById("age-label").innerText = value;
-}

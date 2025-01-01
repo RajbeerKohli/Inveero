@@ -9,6 +9,7 @@ increment_percent = float(input("Enter the percentage increment for monthly paym
 expected_rate_of_return = float(input("Enter the expected annual rate of return (%): "))
 inflation_rate = float(input("Enter the expected annual inflation rate (%): "))
 
+
 # Calculations
 increment_rate = 1 + increment_percent / 100
 rate_of_return = 1 + expected_rate_of_return / 100
@@ -83,6 +84,3 @@ print("\nRetirement Savings Plan:")
 print(df)
 print("\nAdjusted Income Summary:")
 print(adjusted_income_summary)
-
-# # Optionally save the results to a CSV
-# df.to_csv("retirement_savings_plan.csv", index=False)
