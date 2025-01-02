@@ -6,74 +6,78 @@
     margin: 20% auto;
   }
   
+input {
+  --c: black; /* active color */
+  --g: 8px; /* the gap */
+  --l: 5px; /* line thickness*/
+  --s: 30px; /* thumb size*/
+
+  width: 80%;
+  height: var(--s); /* needed for Firefox*/
+  --_c: color-mix(in srgb, var(--c), #000 var(--p, 0%));
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+input:focus-visible,
+input:hover {
+  --p: 25%;
+}
+input:active,
+input:focus-visible {
+  --_b: var(--s);
+}
+/* chromium */
+input[type="range" i]::-webkit-slider-thumb {
+  height: var(--s);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: 0 0 0 var(--_b, var(--l)) inset var(--_c);
+  border-image: linear-gradient(90deg, var(--_c) 50%, #ababab 0) 0 1 /
+    calc(50% - var(--l) / 2) 100vw/0 calc(100vw + var(--g));
+  -webkit-appearance: none;
+  appearance: none;
+  transition: 0.3s;
+}
+/* Firefox */
+input[type="range"]::-moz-range-thumb {
+  height: var(--s);
+  width: var(--s);
+  background: none;
+  border-radius: 50%;
+  box-shadow: 0 0 0 var(--_b, var(--l)) inset var(--_c);
+  border-image: linear-gradient(90deg, var(--_c) 50%, #ababab 0) 0 1 /
+    calc(50% - var(--l) / 2) 100vw/0 calc(100vw + var(--g));
+  -moz-appearance: none;
+  appearance: none;
+  transition: 0.3s;
+}
+@supports not (color: color-mix(in srgb, red, red)) {
   input {
-    --c: black; /* active color */
-    --g: 8px; /* the gap */
-    --l: 5px; /* line thickness*/
-    --s: 30px; /* thumb size*/
-  
-    width: 80%;
-    height: var(--s); /* needed for Firefox*/
-    --_c: color-mix(in srgb, var(--c), #000 var(--p, 0%));
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: none;
-    cursor: pointer;
-    overflow: hidden;
+    --_c: var(--c);
   }
-  input:focus-visible,
-  input:hover {
-    --p: 25%;
-  }
-  input:active,
-  input:focus-visible {
-    --_b: var(--s);
-  }
-  /* chromium */
-  input[type="range" i]::-webkit-slider-thumb {
-    height: var(--s);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    box-shadow: 0 0 0 var(--_b, var(--l)) inset var(--_c);
-    border-image: linear-gradient(90deg, var(--_c) 50%, #ababab 0) 0 1 /
-      calc(50% - var(--l) / 2) 100vw/0 calc(100vw + var(--g));
-    -webkit-appearance: none;
-    appearance: none;
-    transition: 0.3s;
-  }
-  /* Firefox */
-  input[type="range"]::-moz-range-thumb {
-    height: var(--s);
-    width: var(--s);
-    background: none;
-    border-radius: 50%;
-    box-shadow: 0 0 0 var(--_b, var(--l)) inset var(--_c);
-    border-image: linear-gradient(90deg, var(--_c) 50%, #ababab 0) 0 1 /
-      calc(50% - var(--l) / 2) 100vw/0 calc(100vw + var(--g));
-    -moz-appearance: none;
-    appearance: none;
-    transition: 0.3s;
-  }
-  @supports not (color: color-mix(in srgb, red, red)) {
-    input {
-      --_c: var(--c);
-    }
-  }
+}
 
-  span {
-    font-size: 300%;
-  }
+span {
+  font-size: 300%;
+}
 
-  input[type="number"] {
-    font-family: 'Assistant', sans-serif;
-    font-size: 150%;
-    padding: 1vh;
-    -moz-appearance: textfield;
-    border: 2px solid #0000007a; /* Adds a full border */
-    border-radius: 8px; /* Adds rounded corners */
-    width: 40%; /* Ensures the input scales horizontally with its container */
-  }
+input[type="text"] {
+  font-family: 'Assistant', sans-serif;
+  font-size: 150%;
+  padding: 1vh;
+  -moz-appearance: textfield;
+  border: 2px solid #0000007a; /* Adds a full border */
+  border-radius: 8px; /* Adds rounded corners */
+  width: 40%; /* Ensures the input scales horizontally with its container */
+}
+
+input:focus::placeholder {
+  color: transparent; /* Placeholder text becomes transparent when input is focused */
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

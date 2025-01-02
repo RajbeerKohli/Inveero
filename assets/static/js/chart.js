@@ -1,15 +1,31 @@
 document.getElementById("calculateButton").addEventListener("click", calculateRetirementPlan);
 
+// Call the function when the page loads
+window.onload = function() {
+    calculateRetirementPlan();
+};
+
+// Helper function to strip any non-numeric characters
+function parseNumericValue(value, defaultValue) {
+    if (typeof value !== 'string') return defaultValue;  // If it's not a string, return the default value
+
+    // Remove non-numeric characters (including $ and %)
+    const numericValue = value.replace(/[^\d.-]/g, '');
+
+    // Parse and return the numeric value or the default if invalid
+    return isNaN(numericValue) ? defaultValue : parseFloat(numericValue);
+}
+
 function calculateRetirementPlan() {
     try {
-        // Get values from the form
-        const age = parseInt(document.getElementById("current_age").value, 10);
-        const targetAge = parseInt(document.getElementById("retirement_age").value, 10);
-        const desiredMonthlyIncome = parseFloat(document.getElementById("desired_retirement_income").value);
-        const currentMonthlyPayments = parseFloat(document.getElementById("monthly_contribution").value);
-        const incrementPercent = parseFloat(document.getElementById("contribution_increments").value);
-        const expectedRateOfReturn = parseFloat(document.getElementById("expected_return_on_investment").value);
-        const inflationRate = parseFloat(document.getElementById("inflation").value);
+        // Get values from the form, stripping symbols before parsing
+        const age = parseInt(parseNumericValue(document.getElementById("current_age").value), 10) || 30;
+        const targetAge = parseInt(parseNumericValue(document.getElementById("retirement_age").value), 10) || 50;
+        const desiredMonthlyIncome = parseNumericValue(document.getElementById("desired_retirement_income").value) || 3500;
+        const currentMonthlyPayments = parseNumericValue(document.getElementById("monthly_contribution").value) || 500;
+        const incrementPercent = parseNumericValue(document.getElementById("contribution_increments").value) || 10;
+        const expectedRateOfReturn = parseNumericValue(document.getElementById("expected_return_on_investment").value) || 12;
+        const inflationRate = parseNumericValue(document.getElementById("inflation").value) || 5;
 
         // Validate inputs
         if (isNaN(age) || isNaN(targetAge) || isNaN(desiredMonthlyIncome) ||

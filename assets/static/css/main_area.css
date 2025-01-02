@@ -5,16 +5,17 @@
 
 .fixed {
   flex: 0 0 40vw; /* Fixed width of 40vw */
-  background-color: rgba(0, 0, 0, 0.2); /* Light gray background */
-  padding: 20px;
-  margin: auto;
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  /* display: flex;
+  justify-content: center; 
+  align-items: center;   */
 }
 
 .scrollable {
   flex: auto; /* Takes up the remaining space */
   overflow-y: auto; /* Enables vertical scrolling */
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5 ); /* Optional shadow for better separation */
+  /* box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5 );  */
 }
 
 .scrollable h1 {
@@ -24,5 +25,13 @@
 .chart_background {
   background-color: white;
   padding: 2%;
-  border-color: rgba(0, 0, 0, 0.1);
+  border-color: 5px black;
+  margin: auto;
+}
+
+/* Stacked layout for smaller screens */
+@media screen and (max-width: 768px) {
+  .container {
+    display: list-item; /* Creates a horizontal layout for the children */
+  }
 }
