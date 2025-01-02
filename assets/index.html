@@ -7,7 +7,9 @@
     <title>Inveero</title>
     <link rel="stylesheet" href="static/css/body.css" />
     <link rel="stylesheet" href="static/css/landing_page.css" />
-    <link rel="stylesheet" href="static/css/calculator_section.css" />
+    <link rel="stylesheet" href="static/css/input.css" />
+    <!-- <link rel="stylesheet" href="static/css/calculator_section.css" /> -->
+    <link rel="stylesheet" href="static/css/main_area.css" />
   </head>
   <body>
     <!-- Landing Page -->
@@ -18,115 +20,193 @@
       </div>
       <!-- Invisible overlay -->
     </div>
+    <div class="container">
+      <div class="scrollable"> 
+          <h1>A Journey to Financial Independence Through ETF Investments 🌟</h1>
+          <p>ETFs are a versatile tool for both beginners and experienced investors. They offer 
+            an easy way to build a diversified portfolio and are suitable for long-term wealth 
+            building, hedging, or focusing on specific market opportunities. Their combination of 
+            simplicity, flexibility, and cost-efficiency makes them a popular choice in modern 
+            investing.</p>
+            <br />
 
-    <!-- Form Section -->
-    <div class="calculator-section">
-      <div class="calculator-subsection">
-        <form>
-          <!-- Age -->
-          <div class="parameter">
-            <label for="age">Current Age</label>
+          <!-- Current Age - Explanation -->
+          <hr>
+          <h2>Step 1: Know Where You Are - Current Age 📅</h2>
+          <p><strong>Your current age determines how much time you have to invest and grow your wealth.</strong>
+            <br />
+            The earlier you start, the longer your money has to compound and 
+            grow. A 25-year-old has a significant advantage over a 45-year-old because of the power 
+            of compound interest.
+            <br />
+            <strong>Starting sooner can mean less stress later in life. 🕒</strong></p>
+          <!-- Current Age - Input -->
+          <span id="current_age_label">30</span> Years
+          <br />
             <input
               type="range"
-              id="age"
-              name="age"
+              id="current_age"
+              name="current_age"
               min="0"
               max="100"
               value="30"
-              oninput="updateAgeLabel(this.value)"
+              oninput="updateCurrentAgeLabel(this.value)"
             />
-            <span id="age-label">30</span> Years
-          </div>
-          <!-- Risk -->
-          <div class="parameter">
-            <label for="risk">Risk Appetite</label>
+            <br />
+          <hr>
+          <!-- Current Age - End -->
+
+          <!-- Retirement Age - Explanation -->
+          <h2>Step 2: Set Your Destination - Retirement Age 🎯</h2>
+          <p><strong>The age you want to retire by is your goalpost.</strong>
+            <br />
+            Your investment horizon (the time between now and retirement) affects 
+            your risk tolerance and the types of ETFs you invest in. Longer horizons allow for 
+            higher-risk growth-focused investments, while shorter horizons may require a more 
+            conservative approach. 📈📉
+            <br />
+            <Strong>Choose a retirement age that aligns with your goals and health. 🌱</Strong></p>
+          <!-- Retirement Age - Input -->
+            <span id="retirement_age_label">80</span> Years
+            <br />
+              <input
+                type="range"
+                id="retirement_age"
+                name="retirement_age"
+                min="updateCurrentAgeLabel(this.value)"
+                max="100"
+                value="80"
+                oninput="updateRetirementAgeLabel(this.value)"
+              />
+              <br />
+            <hr>
+          <!-- Retirement Age - End -->
+            
+          <!-- Monthly Savings - Explanation -->
+          <h2>Step 3: Map Your Contributions - Monthly Savings 💰</h2>
+          <p><strong>How much can you invest each month?</strong>
+            <br />
+            Regular contributions are the backbone of your investment strategy. 
+            Small, consistent savings can grow exponentially over time. ETFs allow you to invest in a 
+            variety of assets without requiring a large initial sum. 📊
+            <br />
+            <Strong>Prioritize regular savings to build momentum. 🚀</Strong></p>
+          <!-- Monthly Savings - Input -->
             <input
-              type="range"
-              id="risk"
-              min="0"
-              max="2"
-              step="1"
-              value="1"
-              oninput="updateRiskLabel(this.value)"
-            />
-            <span id="risk-label">Medium</span>
-          </div>
-          <!-- Monthly Contribution -->
-          <div class="parameter">
-            <label for="monthly-contribution">Monthly Contribution</label>
-            <input
-              type="number"
-              id="monthly-contribution"
-              name="number"
-              inputmode="numeric"
-              pattern="[0-9]*"
-              required
-            />
-          </div>
-          <!-- Yearly Increment Monthly Contribution -->
-          <div class="parameter">
-            <label for="yearly-increment-monthly-contribution"
-              >Yearly Increment % to Monthly Contribution</label
-            >
-            <input
-              type="number"
-              id="yearly-increment-monthly-contribution"
-              name="number"
-              inputmode="numeric"
-              pattern="[0-9]*"
-              required
-            />
-          </div>
-          <!-- Desired Income at Retirement -->
-          <div class="parameter">
-            <label for="desired-income">Desired Income at Retirement</label>
-            <input
-              type="number"
-              id="desired-income"
-              name="number"
-              inputmode="numeric"
-              pattern="[0-9]*"
-              required
-            />
-          </div>
-          <!-- Yearly Return on Investment -->
-          <div class="parameter">
-            <label for="return-on-investment"
-              >Expected Return On Investment Yearly</label
-            >
-            <input
-              type="number"
-              id="return-on-investment"
-              name="number"
-              inputmode="numeric"
-              pattern="[0-9]*"
-              required
-            />
-          </div>
-          <!-- Annual Inflation -->
-          <div class="parameter">
-            <label for="expected-inflation">Expected Inflation</label>
-            <input
-              type="number"
-              id="expected-inflation"
-              name="number"
-              inputmode="numeric"
-              pattern="[0-9]*"
-              required
-            />
-          </div>
-          <button type="submit">Submit</button>
-        </form>
+            type="number"
+            id="monthly_contribution"
+            name="monthly_contribution"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            required
+          />
+            <br />
+            <br />
+            <hr>
+          <!-- Monthly Savings - End -->
+
+          <!-- Contribution Increments - Explanation -->
+          <h2>Step 4: Adjust for Growth - Contribution Increments 📈</h2>
+          <p><strong>Will you increase your contributions annually?</strong>
+            <br />
+            Incremental increases, either by a percentage (e.g., 5%) or a fixed 
+            amount (e.g., $100), help your investments keep pace with inflation and income growth. A 
+            small annual increase can result in a significantly larger portfolio over time. 🔄
+            <br />
+            <strong>Plan for contribution growth to maximize long-term potential. 💪</strong></p>
+          <!-- Contribution Increments - Input -->
+          <input
+            type="number"
+            id="contribution_increments"
+            name="contribution_increments"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            required
+          />
+            <br />
+            <br />
+            <hr>
+          <!-- Contribution Increments - End -->
+
+          <!-- Desired Retirement Income - Explanation -->
+          <h2>Step 5: Plan Your Freedom - Desired Retirement Income 💸</h2>
+          <p><strong>How much money will you need to live comfortably?</strong>
+            <br />
+            Understanding your required income helps you determine your target 
+            portfolio size. For instance, if you need $50,000 annually, your portfolio might need to be 
+            25x that amount, or $1.25 million (assuming a 4% withdrawal rate). 💡
+            <br />
+            <Strong>Define your lifestyle needs and plan accordingly. 🏡</Strong></p>
+          <!-- Desired Retirement Income - Input -->
+          <input
+            type="number"
+            id="desired_retirement_income"
+            name="number"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            required
+          />
+            <br />
+            <br />
+            <hr>
+          <!-- Desired Retirement Income - End -->
+
+          <!-- Expected Return on Investment - Explanation -->
+          <h2>Step 6: Forecast Your Journey - Expected Return on Investment (ROI) 📈</h2>
+          <p><strong>What return do you expect from your ETFs?</strong>
+            <br />
+            The ROI affects how quickly your investments grow. Growth-oriented ETFs, 
+            such as equity ETFs, often yield higher returns but come with greater risk. Balanced or bond 
+            ETFs typically offer lower returns with stability. ⚖️
+            <br />
+            <strong>Choose ETFs based on your risk appetite and time horizon. 🔍</strong></p>
+          <!-- Expected Return on Investment - Input -->
+          <input
+            type="number"
+            id="expected_return_on_investment"
+            name="expected_return_on_investment"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            required
+          />
+            <br />
+            <br />
+            <hr>
+          <!-- Expected Return on Investment - End -->
+
+          <!-- Inflation - Explanation -->
+          <h2>Step 7: Account for the Weather - Inflation 🌬️</h2>
+          <p><strong>What is the annual inflation rate in your country?</strong>
+            <br />
+            Inflation reduces your purchasing power over time. A $1,000 investment today 
+            may not buy the same value in 20 years. Your investments must outpace inflation to maintain your 
+            standard of living. 💸➡️💸
+            <br />
+            <strong>Factor inflation into your target returns and desired retirement income. 📉</strong></p>
+          <!-- Inflation - Input -->
+          <input
+            type="number"
+            id="inflation"
+            name="inflation"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            required
+          />
+            <br />
+            <br />
+            <hr>
+          <!-- Inflation - End -->
       </div>
-      <div class="visualisation-subsection">
-        <h1>Visualisation</h1>
+      <div class="fixed">
+        <p>Fixed Content</p>
       </div>
     </div>
-
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="static/js/calculator.js"></script>
+    <!-- <script src="static/js/calculator.js"></script> -->
     <script src="static/js/3d_model.js"></script>
+    <script src="static/js/input.js"></script>
   </body>
 </html>

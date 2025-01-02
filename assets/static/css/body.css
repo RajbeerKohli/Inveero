@@ -1,8 +1,9 @@
 /*Calling in fonts used */
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Assistant:300,400,600,700");
 
 body {
   margin: 0;
-  font-family: "Bebas Neue", sans-serif;
+  font-family: 'Assistant', sans-serif; /*"Bebas Neue", sans-serif;*/
   overflow-x: hidden;
 }
